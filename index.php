@@ -41,14 +41,22 @@ $resultats_monstres->closeCursor();
 </head>
 <body>
     <h1>Bienvenue</h1>
-
         <a href="connexion.php">CONNEXION</a>
         <br><br><a href="inscription.php">INSCRIPTION</a>
+
+
 
     <h2>Monstres</h2>
     <?php foreach ($monstres as $monstre): ?>
         <fieldset>
             <legend><?php echo htmlspecialchars($monstre["Nom_Monstre"]); ?></legend>
+            <p>Lieu de vie: <?php echo htmlspecialchars($monstre["Lieu_de_vie"]); ?></p>
+            <a href="lieux_vie.php?ID_Lieu_vie=<?php echo htmlspecialchars($monstre["ID_Lieu_vie"]); ?>">
+                <img src="images/<?php echo htmlspecialchars($monstre["Image_Lieu_de_vie"]); ?>" alt="<?php echo htmlspecialchars($monstre["Lieu_de_vie"]); ?>" style="max-width: 200px; height: auto;" />
+            </a>
+            <a href="monstre.php?ID_Monstre=<?php echo htmlspecialchars($monstre["ID_Monstre"]); ?>">
+                <img src="images/<?php echo htmlspecialchars($monstre["Image_Monstre"]); ?>" alt="<?php echo htmlspecialchars($monstre["Nom_Monstre"]); ?>" style="max-width: 200px; height: auto;" />
+            </a>
         </fieldset>
     <?php endforeach; ?>
 </body>
