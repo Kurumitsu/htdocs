@@ -1,4 +1,5 @@
 <?php
+session_start();
 include('config/configuration.php');
 include('scripts/connection.php');
 

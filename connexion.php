@@ -12,12 +12,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Requête pour récupérer l'utilisateur
     $requete_utilisateur = "SELECT * FROM utilisateur WHERE Email = :email AND pseudo = :pseudo";
-    $stmt = $connection->prepare($requete_utilisateur);
-    $stmt->bindParam(':email', $email, PDO::PARAM_STR);
-    $stmt->bindParam(':pseudo', $pseudo, PDO::PARAM_STR);
-    $stmt->execute();
+    $user = $connection->prepare($requete_utilisateur);
+    $user->bindParam(':email', $email, PDO::PARAM_STR);
+    $user->bindParam(':pseudo', $pseudo, PDO::PARAM_STR);
+    $user->execute();
 
-    $utilisateur = $stmt->fetch(PDO::FETCH_ASSOC);
+    $utilisateur = $user->fetch(PDO::FETCH_ASSOC);
 
     if ($utilisateur) {
         // Vérifie le mot de passe
@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['id_utilisateur'] = $utilisateur['id_utilisateur'];
             $_SESSION['pseudo'] = $utilisateur['pseudo'];
             header("Location: index.php");
-            exit;
+            exit();
         } else {
             $message = "Mot de passe incorrect.";
         }
