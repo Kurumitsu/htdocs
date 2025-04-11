@@ -42,10 +42,11 @@ $resultats_monstres->closeCursor();
 </head>
 <body>
     <h1>Bienvenue</h1>
-        <a href="connexion.php">CONNEXION</a>
-        <br><br><a href="inscription.php">INSCRIPTION</a>
-
-
+    <?php if (isset($_SESSION['utilisateur_id'])): ?>
+        <p>Connecté en tant que <?= htmlspecialchars($_SESSION['pseudo']) ?>. <a href="deconnexion.php">Déconnexion</a></p>
+    <?php else: ?>
+        <a href="connexion.php">CONNEXION</a> | <a href="inscription.php">INSCRIPTION</a>
+    <?php endif; ?>
 
     <h2>Monstres</h2>
     <?php foreach ($monstres as $monstre): ?>
@@ -62,3 +63,4 @@ $resultats_monstres->closeCursor();
     <?php endforeach; ?>
 </body>
 </html>
+

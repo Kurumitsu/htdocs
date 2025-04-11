@@ -5,28 +5,29 @@ include('scripts/connection.php');
 
 $message = '';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $pseudo = $_POST['pseudo'];
     $email = $_POST['email'];
-    $pwd = $_POST['pwd'];
-
+    $pwd = password_hash($_POST['pwd'], PASSWORD_DEFAULT);
+    
     $requete_email_existe = "SELECT COUNT(*) FROM utilisateur WHERE Email = :email";
     $stmt_email_existe = $connection->prepare($requete_email_existe);
     $stmt_email_existe->bindParam(':email', $email, PDO::PARAM_STR);
-    $stmt_email_existe->execute();
+    $stmt_email_existe->execute();    
     $email_existe = $stmt_email_existe->fetchColumn();
 
     if ($email_existe > 0) {
         $message = "Cet email est déjà utilisé.";
     } else {
-        $requete = "INSERT INTO utilisateur (Pseudo, Email, Pwd) VALUES (:pseudo, :email, :pwd)";
-        $stmt = $connection->prepare($requete);
-        $stmt->bindParam(':pseudo', $pseudo, PDO::PARAM_STR);
-        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
-        $stmt->bindParam(':pwd', $pwd, PDO::PARAM_STR);
+        $requete_insert = "INSERT INTO utilisateur (Pseudo, Email, Pwd) VALUES (:pseudo, :email, :pwd)";
+        $insert = $connection->prepare($requete_insert);
+        $insert->bindParam(':pseudo', $pseudo);
+        $insert->bindParam(':email', $email);
+        $insert->bindParam(':pwd', $pwd);
 
-        if ($stmt->execute()) {
-            $message = "Inscription réussie. Vous pouvez vous connecter.";
+        if ($insert->execute()) {
+            header("Location: connexion.php");
+            exit();
         } else {
             $message = "Erreur lors de l'inscription.";
         }
@@ -42,9 +43,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Inscription</title>
 </head>
 <body>
-    <h1>Inscription</h1>
+<h1>Inscription</h1>
 
-    <?php if ($message): ?>
+<?php if ($message): ?>
         <p><?php echo htmlspecialchars($message); ?></p>
     <?php endif; ?>
 

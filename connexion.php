@@ -10,32 +10,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $pwd = $_POST['pwd'];
 
-    // Requête pour récupérer l'utilisateur
     $requete_utilisateur = "SELECT * FROM utilisateur WHERE Email = :email AND pseudo = :pseudo";
-    $user = $connection->prepare($requete_utilisateur);
-    $user->bindParam(':email', $email, PDO::PARAM_STR);
-    $user->bindParam(':pseudo', $pseudo, PDO::PARAM_STR);
-    $user->execute();
+    $connection = $connection->prepare($requete_utilisateur);
+    $connection->bindParam(':pseudo', $pseudo, PDO::PARAM_STR);
+    $connection->bindParam(':email', $email, PDO::PARAM_STR);
+    $connection->execute();
 
-    $utilisateur = $user->fetch(PDO::FETCH_ASSOC);
-
-    if ($utilisateur) {
-        // Vérifie le mot de passe
+    if ($utilisateur = $connection->fetch(PDO::FETCH_ASSOC)) {
         if (password_verify($pwd, $utilisateur['Pwd'])) {
-            $_SESSION['id_utilisateur'] = $utilisateur['id_utilisateur'];
-            $_SESSION['pseudo'] = $utilisateur['pseudo'];
+            $_SESSION['utilisateur_id'] = $utilisateur['Id_utilisateur'];
+            $_SESSION['pseudo'] = $utilisateur['Pseudo'];
             header("Location: index.php");
             exit();
         } else {
             $message = "Mot de passe incorrect.";
         }
     } else {
-        $message = "Email ou pseudo incorrect.";
+        $message = "Email ou pseudo incorrect ou les deux.";
     }
 }
 ?>
-
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
