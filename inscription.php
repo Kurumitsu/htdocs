@@ -7,7 +7,7 @@ $message = '';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $pseudo = $_POST['pseudo'];
     $email = $_POST['email'];
-    $pwd = password_hash($_POST['pwd'], PASSWORD_DEFAULT); 
+    $pwd = $_POST['pwd'];
 
     $requete_email_existe = "SELECT COUNT(*) FROM utilisateur WHERE Email = :email";
     $stmt_email_existe = $connection->prepare($requete_email_existe);

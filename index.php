@@ -15,9 +15,9 @@ $lieux = $resultats_lieux->fetchAll(PDO::FETCH_ASSOC);
 $resultats_lieux->closeCursor();
 $requete_monstres = '
     SELECT 
-        m.ID_Monstre,
-        m.Nom_Monstre,
-        m.Image_Monstre,
+        ID_Monstre,
+        Nom_Monstre,
+        Image_Monstre,
         lv.Nom_du_lieu AS Lieu_de_vie,
         lv.image AS Image_Lieu_de_vie,
         lv.ID_Lieu_vie
