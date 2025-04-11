@@ -1,32 +1,6 @@
 <?php
 include('config/configuration.php');
 include('scripts/connection.php');
-
-$message = '';
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $pseudo = $_POST['pseudo'];
-    $email = $_POST['email'];
-    $pwd = password_hash($_POST['pwd'], PASSWORD_DEFAULT); 
-
-    $requete_utilisateur = "SELECT COUNT(*) FROM utilisateur WHERE Email = :email";
-    $utilisateur1 = $connection->prepare($requete_utilisateur);
-    $utilisateur1->bindParam(':email', $email, PDO::PARAM_STR);
-    $utilisateur1->execute();
-
-
-    if ($utilisateur = $utilisateur1->fetch(PDO::FETCH_ASSOC))
-    //* {
-        //*if {
-           //* $_SESSION['Pwd'] = $utilisateur['Pwd'];
-             //*   $_SESSION['id_utilisateur'] = $utilisateur['id_utilisateur'];
-       //* $_SESSION['pseudo'] = $utilisateur['pseudo'];
-    //* }
-    //* else {
-    //*     $message="Mot de passe incorrect"
-    //* }
-    //* }header("location: index.php");
-}
 ?>
 
 <!DOCTYPE html>
