@@ -1,15 +1,26 @@
 <?php
+
+/**
+ * Page de connexion utilisateur
+ * Gère l'authentification des utilisateurs avec email et mot de passe
+ * Redirige vers l'index après une connexion réussie
+ */
 session_start();
 include('config/configuration.php');
 include('scripts/connection.php');
 
+// Message d'erreur éventuel
 $message = '';
 
+/**
+ * Traitement du formulaire de connexion
+ */
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $pseudo = $_POST['pseudo'];
     $email = $_POST['email'];
     $pwd = $_POST['pwd'];
 
+    // Vérification des identifiants
     $requete_utilisateur = "SELECT * FROM utilisateur WHERE Email = :email AND pseudo = :pseudo";
     $connection = $connection->prepare($requete_utilisateur);
     $connection->bindParam(':pseudo', $pseudo, PDO::PARAM_STR);

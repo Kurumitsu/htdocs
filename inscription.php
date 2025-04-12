@@ -1,15 +1,28 @@
 <?php
+
+/**
+ * Page d'inscription des utilisateurs
+ * Gère la création de nouveaux comptes utilisateurs
+ * Vérifie l'unicité de l'email et crypte le mot de passe
+ */
 session_start();
 include('config/configuration.php');
 include('scripts/connection.php');
 
+/**
+ * Message d'erreur ou de succès
+ */
 $message = '';
 
+/**
+ * Traitement du formulaire d'inscription
+ */
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $pseudo = $_POST['pseudo'];
     $email = $_POST['email'];
     $pwd = password_hash($_POST['pwd'], PASSWORD_DEFAULT);
 
+    // Vérification de l'unicité de l'email
     $requete_email_existe = "SELECT COUNT(*) FROM utilisateur WHERE Email = :email";
     $stmt_email_existe = $connection->prepare($requete_email_existe);
     $stmt_email_existe->bindParam(':email', $email, PDO::PARAM_STR);

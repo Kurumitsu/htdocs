@@ -1,8 +1,17 @@
 <?php
+
+/**
+ * Page de détail d'un lieu de vie
+ * Affiche les informations détaillées d'un lieu spécifique du jeu
+ * Inclut le nom, le type, la description et l'image du lieu
+ */
 session_start();
 include('config/configuration.php');
 include('scripts/connection.php');
 
+/**
+ * Récupération des informations du lieu
+ */
 $ID_Lieu_vie = isset($_GET['ID_Lieu_vie']) ? intval($_GET['ID_Lieu_vie']) : 0;
 $requete_lieu = "
 	SELECT
@@ -24,8 +33,8 @@ $lieu = $stmt_lieu->fetch(PDO::FETCH_ASSOC);
 $stmt_lieu->closeCursor();
 
 if (!$lieu) {
-    echo "Lieu de vie non trouvé.";
-    exit();
+	echo "Lieu de vie non trouvé.";
+	exit();
 }
 
 ?>
@@ -34,20 +43,20 @@ if (!$lieu) {
 <html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo htmlspecialchars($lieu["Nom_du_lieu"]); ?></title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title><?php echo htmlspecialchars($lieu["Nom_du_lieu"]); ?></title>
 </head>
 
 <body>
-    <h1><?php echo htmlspecialchars($lieu["Nom_du_lieu"]); ?></h1>
+	<h1><?php echo htmlspecialchars($lieu["Nom_du_lieu"]); ?></h1>
 
-    <img src="images/<?php echo htmlspecialchars($lieu["image"]); ?>" alt="<?php echo htmlspecialchars($lieu["Nom_du_lieu"]); ?>" style="max-width: 400px; height: auto;" />
+	<img src="images/<?php echo htmlspecialchars($lieu["image"]); ?>" alt="<?php echo htmlspecialchars($lieu["Nom_du_lieu"]); ?>" style="max-width: 400px; height: auto;" />
 
-    <p>Type: <?php echo htmlspecialchars($lieu["Type_de_lieu"]); ?></p>
-    <p>Description: <?php echo htmlspecialchars($lieu["Description"]); ?></p>
+	<p>Type: <?php echo htmlspecialchars($lieu["Type_de_lieu"]); ?></p>
+	<p>Description: <?php echo htmlspecialchars($lieu["Description"]); ?></p>
 
-    <a href="index.php">Retour à la liste des lieux de vie</a>
+	<a href="index.php">Retour à la liste des lieux de vie</a>
 </body>
 
 </html>

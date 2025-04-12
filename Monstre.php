@@ -1,10 +1,23 @@
 <?php
+
+/**
+ * Page de détail d'un monstre
+ * Affiche les informations détaillées d'un monstre spécifique
+ * Gère l'affichage et la gestion des commentaires associés
+ * Affiche les armes et armures liées au monstre
+ */
 session_start();
 include('config/configuration.php');
 include('scripts/connection.php');
 
+/**
+ * Récupération et validation de l'ID du monstre
+ */
 $ID_Monstre = isset($_GET['ID_Monstre']) ? intval($_GET['ID_Monstre']) : 0;
-// Requête monstre
+
+/**
+ * Requête pour les informations du monstre et son lieu de vie
+ */
 $requete_monstre = "SELECT m.ID_Monstre, m.Nom_Monstre, m.Niveau, m.Biographie, m.Image_Monstre,
 lv.Nom_du_lieu AS Lieu_de_vie
 FROM monstres m
@@ -16,11 +29,17 @@ $stmt_monstre->bindParam(':ID_Monstre', $ID_Monstre, PDO::PARAM_INT);
 $stmt_monstre->execute();
 $monstre = $stmt_monstre->fetch(PDO::FETCH_ASSOC);
 
+/**
+ * Vérification de l'existence du monstre
+ */
 if (!$monstre) {
 	echo "Monstre non trouvé.";
 	exit();
 }
 
+/**
+ * Récupération des armes et armures du monstre
+ */
 $id_armure_arme = isset($_GET['ID_Arme_Armure']) ? intval($_GET['ID_Arme_Armure']) : 0;
 $requete_arme_armure = "SELECT ID_Arme_Armure,Nom,Type,Puissance,Defense,Niveau
 FROM armes_armures
@@ -32,8 +51,9 @@ $ARM_ARMURE->execute();
 $ARME_ARMURE = $ARM_ARMURE->fetchAll((PDO::FETCH_ASSOC));
 $ARM_ARMURE->closeCursor();
 
-
-// Traitement commentaire
+/**
+ * Traitement des commentaires
+ */
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	if (isset($_POST['contenu_commentaire']) && isset($_SESSION['utilisateur_id'])) {
 		// Ajout nouveau commentaire
@@ -74,7 +94,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	}
 }
 
-// Récupération commentaires avec id_comm et Id_utilisateur
+/**
+ * Récupération des commentaires avec id_comm et Id_utilisateur
+ */
 $requete_commentaires = "SELECT c.id_comm, c.Id_utilisateur, c.Contenu_commentaire, u.Pseudo
 FROM commentaires c
 INNER JOIN utilisateur u ON c.Id_utilisateur = u.Id_utilisateur

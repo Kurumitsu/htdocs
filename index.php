@@ -1,7 +1,17 @@
 <?php
+
+/**
+ * Page d'accueil du site Monster Hunter World
+ * Affiche la liste des monstres et leurs lieux de vie associés
+ * Gère également l'état de connexion de l'utilisateur
+ */
 session_start();
 include('config/configuration.php');
 include('scripts/connection.php');
+
+/**
+ * Récupération des lieux de vie
+ */
 $requete_lieux = "
 	SELECT
 		ID_Lieu_vie,
@@ -14,6 +24,10 @@ $requete_lieux = "
 $resultats_lieux = $connection->query($requete_lieux);
 $lieux = $resultats_lieux->fetchAll(PDO::FETCH_ASSOC);
 $resultats_lieux->closeCursor();
+
+/**
+ * Récupération des monstres avec leurs lieux de vie
+ */
 $requete_monstres = '
 	SELECT
 		ID_Monstre,
