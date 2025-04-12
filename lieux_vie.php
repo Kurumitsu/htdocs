@@ -5,16 +5,16 @@ include('scripts/connection.php');
 
 $ID_Lieu_vie = isset($_GET['ID_Lieu_vie']) ? intval($_GET['ID_Lieu_vie']) : 0;
 $requete_lieu = "
-    SELECT 
-        ID_Lieu_vie,
-        Nom_du_lieu,
-        Type_de_lieu,
-        Description,
-        image
-    FROM 
-        lieux_vie
-    WHERE
-        ID_Lieu_vie = :ID_Lieu_vie
+	SELECT
+		ID_Lieu_vie,
+		Nom_du_lieu,
+		Type_de_lieu,
+		Description,
+		image
+	FROM
+		lieux_vie
+	WHERE
+		ID_Lieu_vie = :ID_Lieu_vie
 ";
 
 $stmt_lieu = $connection->prepare($requete_lieu);
@@ -32,11 +32,13 @@ if (!$lieu) {
 
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($lieu["Nom_du_lieu"]); ?></title>
 </head>
+
 <body>
     <h1><?php echo htmlspecialchars($lieu["Nom_du_lieu"]); ?></h1>
 
@@ -47,4 +49,5 @@ if (!$lieu) {
 
     <a href="index.php">Retour à la liste des lieux de vie</a>
 </body>
+
 </html>

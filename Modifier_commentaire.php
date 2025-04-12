@@ -26,6 +26,5 @@ if ($commentaire && $commentaire['Id_utilisateur'] === $_SESSION['utilisateur_id
     $stmt->execute();
 }
 
-header("Location: ".$_SERVER['HTTP_REFERER']);
+header("Location: " . $_SERVER['HTTP_REFERER']);
 exit();
-?>

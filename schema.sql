@@ -28,13 +28,13 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `armes_armures` (
-  `ID_Arme_Armure` int(11) NOT NULL,
-  `Nom` varchar(100) NOT NULL,
-  `Type` varchar(50) NOT NULL,
-  `Puissance` int(11) NOT NULL,
-  `Defense` int(11) NOT NULL,
-  `Niveau` int(11) NOT NULL,
-  `ID_Monstre` int(11) NOT NULL
+	`ID_Arme_Armure` int(11) NOT NULL,
+	`Nom` varchar(100) NOT NULL,
+	`Type` varchar(50) NOT NULL,
+	`Puissance` int(11) NOT NULL,
+	`Defense` int(11) NOT NULL,
+	`Niveau` int(11) NOT NULL,
+	`ID_Monstre` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -90,10 +90,10 @@ INSERT INTO `armes_armures` (`ID_Arme_Armure`, `Nom`, `Type`, `Puissance`, `Defe
 --
 
 CREATE TABLE `commentaires` (
-  `ID_Comm` int(11) NOT NULL,
-  `Id_utilisateur` int(11) DEFAULT NULL,
-  `Contenu_commentaire` text DEFAULT NULL,
-  `ID_Monstre` int(11) DEFAULT NULL
+	`ID_Comm` int(11) NOT NULL,
+	`Id_utilisateur` int(11) DEFAULT NULL,
+	`Contenu_commentaire` text DEFAULT NULL,
+	`ID_Monstre` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -110,11 +110,11 @@ INSERT INTO `commentaires` (`ID_Comm`, `Id_utilisateur`, `Contenu_commentaire`, 
 --
 
 CREATE TABLE `lieux_vie` (
-  `ID_Lieu_vie` int(11) NOT NULL,
-  `Nom_du_lieu` varchar(100) DEFAULT NULL,
-  `Type_de_lieu` varchar(50) DEFAULT NULL,
-  `Description` text DEFAULT NULL,
-  `image` varchar(255) NOT NULL
+	`ID_Lieu_vie` int(11) NOT NULL,
+	`Nom_du_lieu` varchar(100) DEFAULT NULL,
+	`Type_de_lieu` varchar(50) DEFAULT NULL,
+	`Description` text DEFAULT NULL,
+	`image` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -136,12 +136,12 @@ INSERT INTO `lieux_vie` (`ID_Lieu_vie`, `Nom_du_lieu`, `Type_de_lieu`, `Descript
 --
 
 CREATE TABLE `monstres` (
-  `ID_Monstre` int(11) NOT NULL,
-  `Nom_Monstre` varchar(100) NOT NULL,
-  `Niveau` int(11) NOT NULL,
-  `ID_Lieu_vie` int(11) NOT NULL,
-  `Biographie` text NOT NULL,
-  `Image_Monstre` varchar(255) NOT NULL
+	`ID_Monstre` int(11) NOT NULL,
+	`Nom_Monstre` varchar(100) NOT NULL,
+	`Niveau` int(11) NOT NULL,
+	`ID_Lieu_vie` int(11) NOT NULL,
+	`Biographie` text NOT NULL,
+	`Image_Monstre` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -167,10 +167,10 @@ INSERT INTO `monstres` (`ID_Monstre`, `Nom_Monstre`, `Niveau`, `ID_Lieu_vie`, `B
 --
 
 CREATE TABLE `utilisateur` (
-  `Id_utilisateur` int(11) NOT NULL,
-  `Pseudo` varchar(50) NOT NULL,
-  `Email` varchar(100) NOT NULL,
-  `Pwd` varchar(255) NOT NULL
+	`Id_utilisateur` int(11) NOT NULL,
+	`Pseudo` varchar(50) NOT NULL,
+	`Email` varchar(100) NOT NULL,
+	`Pwd` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -188,35 +188,35 @@ INSERT INTO `utilisateur` (`Id_utilisateur`, `Pseudo`, `Email`, `Pwd`) VALUES
 -- Index pour la table `armes_armures`
 --
 ALTER TABLE `armes_armures`
-  ADD PRIMARY KEY (`ID_Arme_Armure`),
-  ADD KEY `ID_Monstre` (`ID_Monstre`);
+	ADD PRIMARY KEY (`ID_Arme_Armure`),
+	ADD KEY `ID_Monstre` (`ID_Monstre`);
 
 --
 -- Index pour la table `commentaires`
 --
 ALTER TABLE `commentaires`
-  ADD PRIMARY KEY (`ID_Comm`),
-  ADD KEY `ID_Monstre` (`ID_Monstre`),
-  ADD KEY `Id_utilisateur` (`Id_utilisateur`);
+	ADD PRIMARY KEY (`ID_Comm`),
+	ADD KEY `ID_Monstre` (`ID_Monstre`),
+	ADD KEY `Id_utilisateur` (`Id_utilisateur`);
 
 --
 -- Index pour la table `lieux_vie`
 --
 ALTER TABLE `lieux_vie`
-  ADD PRIMARY KEY (`ID_Lieu_vie`);
+	ADD PRIMARY KEY (`ID_Lieu_vie`);
 
 --
 -- Index pour la table `monstres`
 --
 ALTER TABLE `monstres`
-  ADD PRIMARY KEY (`ID_Monstre`),
-  ADD KEY `ID_Lieu_vie` (`ID_Lieu_vie`);
+	ADD PRIMARY KEY (`ID_Monstre`),
+	ADD KEY `ID_Lieu_vie` (`ID_Lieu_vie`);
 
 --
 -- Index pour la table `utilisateur`
 --
 ALTER TABLE `utilisateur`
-  ADD PRIMARY KEY (`Id_utilisateur`);
+	ADD PRIMARY KEY (`Id_utilisateur`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
@@ -226,31 +226,31 @@ ALTER TABLE `utilisateur`
 -- AUTO_INCREMENT pour la table `armes_armures`
 --
 ALTER TABLE `armes_armures`
-  MODIFY `ID_Arme_Armure` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+	MODIFY `ID_Arme_Armure` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT pour la table `commentaires`
 --
 ALTER TABLE `commentaires`
-  MODIFY `ID_Comm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+	MODIFY `ID_Comm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pour la table `lieux_vie`
 --
 ALTER TABLE `lieux_vie`
-  MODIFY `ID_Lieu_vie` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+	MODIFY `ID_Lieu_vie` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT pour la table `monstres`
 --
 ALTER TABLE `monstres`
-  MODIFY `ID_Monstre` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+	MODIFY `ID_Monstre` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT pour la table `utilisateur`
 --
 ALTER TABLE `utilisateur`
-  MODIFY `Id_utilisateur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+	MODIFY `Id_utilisateur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Contraintes pour les tables déchargées
@@ -260,20 +260,20 @@ ALTER TABLE `utilisateur`
 -- Contraintes pour la table `armes_armures`
 --
 ALTER TABLE `armes_armures`
-  ADD CONSTRAINT `armes_armures_ibfk_1` FOREIGN KEY (`ID_Monstre`) REFERENCES `monstres` (`ID_Monstre`);
+	ADD CONSTRAINT `armes_armures_ibfk_1` FOREIGN KEY (`ID_Monstre`) REFERENCES `monstres` (`ID_Monstre`);
 
 --
 -- Contraintes pour la table `commentaires`
 --
 ALTER TABLE `commentaires`
-  ADD CONSTRAINT `commentaires_ibfk_1` FOREIGN KEY (`ID_Monstre`) REFERENCES `monstres` (`ID_Monstre`),
-  ADD CONSTRAINT `commentaires_ibfk_2` FOREIGN KEY (`Id_utilisateur`) REFERENCES `utilisateur` (`Id_utilisateur`);
+	ADD CONSTRAINT `commentaires_ibfk_1` FOREIGN KEY (`ID_Monstre`) REFERENCES `monstres` (`ID_Monstre`),
+	ADD CONSTRAINT `commentaires_ibfk_2` FOREIGN KEY (`Id_utilisateur`) REFERENCES `utilisateur` (`Id_utilisateur`);
 
 --
 -- Contraintes pour la table `monstres`
 --
 ALTER TABLE `monstres`
-  ADD CONSTRAINT `monstres_ibfk_1` FOREIGN KEY (`ID_Lieu_vie`) REFERENCES `lieux_vie` (`ID_Lieu_vie`);
+	ADD CONSTRAINT `monstres_ibfk_1` FOREIGN KEY (`ID_Lieu_vie`) REFERENCES `lieux_vie` (`ID_Lieu_vie`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

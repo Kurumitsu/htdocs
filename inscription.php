@@ -9,11 +9,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $pseudo = $_POST['pseudo'];
     $email = $_POST['email'];
     $pwd = password_hash($_POST['pwd'], PASSWORD_DEFAULT);
-    
+
     $requete_email_existe = "SELECT COUNT(*) FROM utilisateur WHERE Email = :email";
     $stmt_email_existe = $connection->prepare($requete_email_existe);
     $stmt_email_existe->bindParam(':email', $email, PDO::PARAM_STR);
-    $stmt_email_existe->execute();    
+    $stmt_email_existe->execute();
     $email_existe = $stmt_email_existe->fetchColumn();
 
     if ($email_existe > 0) {
@@ -37,15 +37,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inscription</title>
 </head>
-<body>
-<h1>Inscription</h1>
 
-<?php if ($message): ?>
+<body>
+    <h1>Inscription</h1>
+
+    <?php if ($message): ?>
         <p><?php echo htmlspecialchars($message); ?></p>
     <?php endif; ?>
 
@@ -64,4 +66,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <a href="connexion.php">Déjà inscrit? Se connecter</a>
 </body>
+
 </html>
