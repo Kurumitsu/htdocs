@@ -63,4 +63,3 @@ $resultats_monstres->closeCursor();
     <?php endforeach; ?>
 </body>
 </html>
-
