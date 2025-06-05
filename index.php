@@ -54,6 +54,9 @@ $resultats_monstres->closeCursor();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Monster Hunter: World</title>
+    <script src="js/filtre.js"></script>
+    <script src="js/jour_nuit.js"></script>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
@@ -64,9 +67,23 @@ $resultats_monstres->closeCursor();
         <a href="connexion.php">CONNEXION</a> | <a href="inscription.php">INSCRIPTION</a>
     <?php endif; ?>
 
+    <button id="toggle-theme">Mode nuit</button>
+
+    <label for="filtre-lieu">Filtrer par lieu de vie :</label>
+    <select id="filtre-lieu">
+        <option value="">Tous les lieux</option>
+        <?php foreach ($lieux as $lieu): ?>
+            <option value="<?= htmlspecialchars($lieu['ID_Lieu_vie']) ?>">
+                <?= htmlspecialchars($lieu['Nom_du_lieu']) ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
+
     <h2>Monstres</h2>
+    <div id="liste-monstres">
     <?php foreach ($monstres as $monstre): ?>
-        <fieldset>
+        <fieldset class="carte-monstre"
+            data-lieu="<?= htmlspecialchars($monstre["ID_Lieu_vie"]) ?>">
             <legend><?php echo htmlspecialchars($monstre["Nom_Monstre"]); ?></legend>
             <p>Lieu de vie: <?php echo htmlspecialchars($monstre["Lieu_de_vie"]); ?></p>
             <a href="lieux_vie.php?ID_Lieu_vie=<?php echo htmlspecialchars($monstre["ID_Lieu_vie"]); ?>">
@@ -77,6 +94,7 @@ $resultats_monstres->closeCursor();
             </a>
         </fieldset>
     <?php endforeach; ?>
+    </div>
 </body>
 
 </html>

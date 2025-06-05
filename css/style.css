@@ -1,0 +1,9 @@
+/* Mode nuit */
+.nuit {
+    background: #222;
+    color: #eee;
+}
+.nuit fieldset {
+    background: #333;
+    border-color: #888;
+}
